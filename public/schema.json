@@ -1,0 +1,474 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://seatjson.com/schema/v0.1/schema.json",
+  "title": "SeatJSON",
+  "description": "A JSON format for describing venue seating layouts",
+  "type": "object",
+  "required": ["version", "venue", "levels"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "SeatJSON format version",
+      "const": "0.1"
+    },
+    "venue": {
+      "$ref": "#/definitions/VenueInfo"
+    },
+    "stage": {
+      "$ref": "#/definitions/Stage"
+    },
+    "tiling": {
+      "$ref": "#/definitions/TilingConfig"
+    },
+    "levels": {
+      "type": "array",
+      "description": "Venue levels (floors)",
+      "items": {
+        "$ref": "#/definitions/Level"
+      },
+      "minItems": 1
+    },
+    "zones": {
+      "type": "array",
+      "description": "Geometric overlays with properties",
+      "items": {
+        "$ref": "#/definitions/Zone"
+      },
+      "default": []
+    }
+  },
+  "definitions": {
+    "VenueInfo": {
+      "type": "object",
+      "required": ["id", "name", "type"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique venue identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Venue name"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["theater", "stadium", "arena", "concert_hall", "other"],
+          "description": "Venue type"
+        },
+        "capacity": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total venue capacity"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom metadata"
+        }
+      }
+    },
+    "Stage": {
+      "type": "object",
+      "required": ["position", "orientation"],
+      "properties": {
+        "position": {
+          "type": "array",
+          "description": "Stage position [x, y] in meters",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "orientation": {
+          "type": "number",
+          "description": "Stage orientation in degrees (0 = facing positive Y)"
+        },
+        "bounds": {
+          "type": "array",
+          "description": "Stage boundary polygon",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 3
+        }
+      }
+    },
+    "TilingConfig": {
+      "type": "object",
+      "required": ["scheme", "minZoom", "maxZoom", "bounds", "tileUrl"],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "const": "xyz",
+          "description": "Tiling scheme"
+        },
+        "minZoom": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum zoom level"
+        },
+        "maxZoom": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum zoom level"
+        },
+        "bounds": {
+          "type": "array",
+          "description": "Venue bounds [[minX, minY], [maxX, maxY]]",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "tileUrl": {
+          "type": "string",
+          "description": "URL template with {z}/{x}/{y} placeholders"
+        }
+      }
+    },
+    "Level": {
+      "type": "object",
+      "required": ["id", "name", "elevation", "sections"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Level identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Level name"
+        },
+        "elevation": {
+          "type": "number",
+          "description": "Height in meters above ground (0 = ground level)"
+        },
+        "sections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Section"
+          },
+          "minItems": 1
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom metadata"
+        }
+      }
+    },
+    "Section": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Section identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Section name"
+        },
+        "rows": {
+          "type": "array",
+          "description": "Rows (omitted when using tiling)",
+          "items": {
+            "$ref": "#/definitions/Row"
+          }
+        },
+        "bounds": {
+          "type": "array",
+          "description": "Section bounds [[minX, minY], [maxX, maxY]]",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom metadata"
+        }
+      }
+    },
+    "Row": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ParametricRow"
+        },
+        {
+          "$ref": "#/definitions/ExplicitRow"
+        }
+      ]
+    },
+    "ParametricRow": {
+      "type": "object",
+      "required": ["id", "type", "seatCount", "layout"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Row identifier"
+        },
+        "type": {
+          "type": "string",
+          "const": "parametric"
+        },
+        "seatCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of seats in row"
+        },
+        "layout": {
+          "type": "string",
+          "enum": ["linear", "arc"],
+          "description": "Row layout type"
+        },
+        "start": {
+          "type": "array",
+          "description": "Start position for linear rows [x, y]",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "end": {
+          "type": "array",
+          "description": "End position for linear rows [x, y]",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "center": {
+          "type": "array",
+          "description": "Center position for arc rows [x, y]",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Radius for arc rows"
+        },
+        "startAngle": {
+          "type": "number",
+          "description": "Start angle for arc rows (degrees)"
+        },
+        "endAngle": {
+          "type": "number",
+          "description": "End angle for arc rows (degrees)"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom metadata"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "layout": {
+                "const": "linear"
+              }
+            }
+          },
+          "then": {
+            "required": ["start", "end"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "layout": {
+                "const": "arc"
+              }
+            }
+          },
+          "then": {
+            "required": ["center", "radius", "startAngle", "endAngle"]
+          }
+        }
+      ]
+    },
+    "ExplicitRow": {
+      "type": "object",
+      "required": ["id", "type", "seats"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Row identifier"
+        },
+        "type": {
+          "type": "string",
+          "const": "explicit"
+        },
+        "seats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Seat"
+          },
+          "minItems": 1
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom metadata"
+        }
+      }
+    },
+    "Seat": {
+      "type": "object",
+      "required": ["id", "position"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Seat identifier"
+        },
+        "position": {
+          "type": "array",
+          "description": "Seat position [x, y] in meters",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom metadata"
+        }
+      }
+    },
+    "Zone": {
+      "type": "object",
+      "required": ["id", "name", "type", "properties", "geometry"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Zone identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Zone name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Zone type (pricing, accessibility, view_quality, etc.)"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Zone properties"
+        },
+        "geometry": {
+          "$ref": "#/definitions/ZoneGeometry"
+        }
+      }
+    },
+    "ZoneGeometry": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/PolygonGeometry"
+        },
+        {
+          "$ref": "#/definitions/CircleGeometry"
+        },
+        {
+          "$ref": "#/definitions/RectangleGeometry"
+        }
+      ]
+    },
+    "PolygonGeometry": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "polygon"
+        },
+        "coordinates": {
+          "type": "array",
+          "description": "Polygon vertices [[x, y], ...]",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 3
+        }
+      }
+    },
+    "CircleGeometry": {
+      "type": "object",
+      "required": ["type", "center", "radius"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "circle"
+        },
+        "center": {
+          "type": "array",
+          "description": "Circle center [x, y]",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Circle radius in meters"
+        }
+      }
+    },
+    "RectangleGeometry": {
+      "type": "object",
+      "required": ["type", "min", "max"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "rectangle"
+        },
+        "min": {
+          "type": "array",
+          "description": "Bottom-left corner [x, y]",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "max": {
+          "type": "array",
+          "description": "Top-right corner [x, y]",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    }
+  }
+}

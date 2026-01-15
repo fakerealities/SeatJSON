@@ -1,5 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import styles from './TypeScriptPage.module.css';
 
 export default function TypeScriptPage() {
   const typeScriptCode = `/**
@@ -135,23 +136,12 @@ export interface TileData {
 export type TileRow = (ParametricRow | ExplicitRow) & {
   sectionId: string; // Reference to parent section
   levelId: string; // Reference to parent level
-}
-
-/**
- * Helper type for real-time seat status updates
- * (not part of SeatJSON format)
- */
-export interface SeatStatus {
-  seatId: string; // Full seat ID: "level-section-row-seat"
-  status: 'available' | 'held' | 'sold' | 'blocked';
-  timestamp?: number;
-  metadata?: Record<string, unknown>;
 }`;
 
   return (
-    <div style={{ padding: '48px 64px', maxWidth: '1200px' }}>
-      <h1 style={{ fontSize: '48px', fontWeight: 700, margin: '0 0 16px' }}>TypeScript Types</h1>
-      <p style={{ fontSize: '18px', color: '#666', margin: '0 0 48px' }}>
+    <div className={styles.page}>
+      <h1 className={styles.title}>TypeScript Types</h1>
+      <p className={styles.subtitle}>
         Complete TypeScript definitions for the SeatJSON format.
       </p>
 
@@ -162,39 +152,41 @@ export interface SeatStatus {
           borderRadius: '8px',
           fontSize: '14px',
           padding: '24px',
+          background: '#12121a',
+          border: '1px solid #1a1a2e',
         }}
         showLineNumbers
       >
         {typeScriptCode}
       </SyntaxHighlighter>
 
-      <div style={{ marginTop: '48px' }}>
-        <h2 style={{ fontSize: '24px', fontWeight: 600, margin: '0 0 16px' }}>Key Concepts</h2>
+      <div className={styles.conceptsSection}>
+        <h2 className={styles.sectionTitle}>Key Concepts</h2>
 
-        <div style={{ marginBottom: '24px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 600, margin: '0 0 8px' }}>Hierarchy</h3>
-          <p style={{ color: '#666', lineHeight: '1.6', margin: 0 }}>
-            SeatJSON uses a 4-level hierarchy: <strong>Levels</strong> → <strong>Sections</strong> → <strong>Rows</strong> → <strong>Seats</strong>
+        <div className={styles.concept}>
+          <h3 className={styles.conceptTitle}>Hierarchy</h3>
+          <p className={styles.conceptText}>
+            SeatJSON uses a 4-level hierarchy: <strong className={styles.highlight}>Levels</strong> → <strong className={styles.highlight}>Sections</strong> → <strong className={styles.highlight}>Rows</strong> → <strong className={styles.highlight}>Seats</strong>
           </p>
         </div>
 
-        <div style={{ marginBottom: '24px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 600, margin: '0 0 8px' }}>Parametric vs Explicit</h3>
-          <p style={{ color: '#666', lineHeight: '1.6', margin: 0 }}>
-            Rows can be <strong>parametric</strong> (defined by a pattern like arc or linear) or <strong>explicit</strong> (each seat position defined manually).
+        <div className={styles.concept}>
+          <h3 className={styles.conceptTitle}>Parametric vs Explicit</h3>
+          <p className={styles.conceptText}>
+            Rows can be <strong className={styles.highlight}>parametric</strong> (defined by a pattern like arc or linear) or <strong className={styles.highlight}>explicit</strong> (each seat position defined manually).
           </p>
         </div>
 
-        <div style={{ marginBottom: '24px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 600, margin: '0 0 8px' }}>Zones</h3>
-          <p style={{ color: '#666', lineHeight: '1.6', margin: 0 }}>
+        <div className={styles.concept}>
+          <h3 className={styles.conceptTitle}>Zones</h3>
+          <p className={styles.conceptText}>
             Zones are geometric overlays with properties. Use them for pricing tiers, accessibility areas, view quality, or any custom classification.
           </p>
         </div>
 
-        <div style={{ marginBottom: '24px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: 600, margin: '0 0 8px' }}>Tiling</h3>
-          <p style={{ color: '#666', lineHeight: '1.6', margin: 0 }}>
+        <div className={styles.concept}>
+          <h3 className={styles.conceptTitle}>Tiling</h3>
+          <p className={styles.conceptText}>
             Optional tiling support for massive venues (50,000+ seats). When enabled, the main file becomes a manifest and geometry lives in separate tile files.
           </p>
         </div>

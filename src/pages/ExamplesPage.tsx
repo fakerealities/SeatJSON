@@ -1,5 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import styles from './ExamplesPage.module.css';
 
 export default function ExamplesPage() {
   const smallTheater = {
@@ -360,19 +361,17 @@ export default function ExamplesPage() {
   };
 
   return (
-    <div style={{ padding: '48px 64px', maxWidth: '1200px' }}>
-      <h1 style={{ fontSize: '48px', fontWeight: 700, margin: '0 0 16px' }}>Examples</h1>
-      <p style={{ fontSize: '18px', color: '#666', margin: '0 0 48px' }}>
+    <div className={styles.page}>
+      <h1 className={styles.title}>Examples</h1>
+      <p className={styles.subtitle}>
         Real-world examples of SeatJSON files for different venue types.
       </p>
 
-      {/* Small Theater */}
-      <section style={{ marginBottom: '64px' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: 600, margin: '0 0 16px' }}>Small Theater</h2>
-        <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '24px' }}>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Small Theater</h2>
+        <p className={styles.sectionText}>
           A 300-seat theater with curved rows, multiple levels (stalls and balcony), pricing zones, and wheelchair accessibility.
         </p>
-
         <SyntaxHighlighter
           language="json"
           style={vscDarkPlus}
@@ -380,6 +379,8 @@ export default function ExamplesPage() {
             borderRadius: '8px',
             fontSize: '14px',
             padding: '24px',
+            background: '#12121a',
+            border: '1px solid #1a1a2e',
           }}
           showLineNumbers
         >
@@ -387,13 +388,11 @@ export default function ExamplesPage() {
         </SyntaxHighlighter>
       </section>
 
-      {/* Large Stadium */}
-      <section style={{ marginBottom: '64px' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: 600, margin: '0 0 16px' }}>Large Stadium</h2>
-        <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '24px' }}>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Large Stadium</h2>
+        <p className={styles.sectionText}>
           A 40,000-seat stadium with tiling enabled for incremental loading. Includes club sections, standing terraces, and multiple pricing tiers.
         </p>
-
         <SyntaxHighlighter
           language="json"
           style={vscDarkPlus}
@@ -401,6 +400,8 @@ export default function ExamplesPage() {
             borderRadius: '8px',
             fontSize: '14px',
             padding: '24px',
+            background: '#12121a',
+            border: '1px solid #1a1a2e',
           }}
           showLineNumbers
         >
@@ -408,13 +409,11 @@ export default function ExamplesPage() {
         </SyntaxHighlighter>
       </section>
 
-      {/* Airplane */}
-      <section style={{ marginBottom: '64px' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: 600, margin: '0 0 16px' }}>Aircraft (A320)</h2>
-        <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '24px' }}>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Aircraft (A320)</h2>
+        <p className={styles.sectionText}>
           A narrow-body aircraft with 180 seats, business and economy cabins, galleys, and lavatories marked as facility zones.
         </p>
-
         <SyntaxHighlighter
           language="json"
           style={vscDarkPlus}
@@ -422,6 +421,8 @@ export default function ExamplesPage() {
             borderRadius: '8px',
             fontSize: '14px',
             padding: '24px',
+            background: '#12121a',
+            border: '1px solid #1a1a2e',
           }}
           showLineNumbers
         >
@@ -429,13 +430,11 @@ export default function ExamplesPage() {
         </SyntaxHighlighter>
       </section>
 
-      {/* Concert Venue */}
-      <section style={{ marginBottom: '64px' }}>
-        <h2 style={{ fontSize: '32px', fontWeight: 600, margin: '0 0 16px' }}>Concert Venue</h2>
-        <p style={{ color: '#666', lineHeight: '1.6', marginBottom: '24px' }}>
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Concert Venue</h2>
+        <p className={styles.sectionText}>
           A warehouse-style concert venue with general admission standing pit (3,500 capacity), seated bowl, and inaccessible zones for special installations.
         </p>
-
         <SyntaxHighlighter
           language="json"
           style={vscDarkPlus}
@@ -443,6 +442,8 @@ export default function ExamplesPage() {
             borderRadius: '8px',
             fontSize: '14px',
             padding: '24px',
+            background: '#12121a',
+            border: '1px solid #1a1a2e',
           }}
           showLineNumbers
         >

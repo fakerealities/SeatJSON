@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import styles from './Header.module.css';
 
 export default function Header() {
+  const location = useLocation();
+  const isDocsActive = location.pathname.startsWith('/docs');
+
   return (
-    <header style={{
-      borderBottom: '1px solid #eee',
-      padding: '20px 48px',
-      fontFamily: 'system-ui, sans-serif'
-    }}>
-      <nav style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '24px', alignItems: 'center' }}>
-        <Link to="/" style={{ fontWeight: 600, fontSize: '18px', textDecoration: 'none', color: '#000' }}>
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        <Link to="/" className={styles.logo}>
           SeatJSON
         </Link>
-        <Link to="/docs" style={{ textDecoration: 'none', color: '#666' }}>
+        <Link to="/docs" className={`${styles.navLink} ${isDocsActive ? styles.navLinkActive : ''}`}>
           Docs
         </Link>
       </nav>

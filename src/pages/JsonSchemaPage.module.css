@@ -1,0 +1,118 @@
+.page {
+  padding: 48px 0 48px 48px;
+  flex: 1;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #8b8b9e;
+  margin: 0 0 24px;
+}
+
+.schemaBox {
+  background: #12121a;
+  padding: 16px 24px;
+  border-radius: 8px;
+  margin-bottom: 48px;
+  border-left: 4px solid #1e3a5f;
+  border: 1px solid #1a1a2e;
+}
+
+.schemaBoxTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.schemaUrl {
+  font-size: 14px;
+  font-family: monospace;
+  color: #8b8b9e;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.text {
+  color: #8b8b9e;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.inlineCode {
+  color: #fff;
+  background: #1a1a2e;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.codeBlock {
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 24px;
+  margin-bottom: 48px;
+  background: #12121a;
+  border: 1px solid #1a1a2e;
+}
+
+.benefitsList {
+  color: #8b8b9e;
+  line-height: 1.8;
+  padding-left: 24px;
+  margin-bottom: 48px;
+}
+
+.highlight {
+  color: #fff;
+}
+
+.downloadButton {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #1e3a5f;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 32px 24px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+
+  .benefitsList {
+    font-size: 14px;
+    padding-left: 20px;
+  }
+}

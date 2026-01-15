@@ -1,0 +1,84 @@
+.page {
+  padding: 48px 0 48px 48px;
+  flex: 1;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #8b8b9e;
+  margin: 0 0 48px;
+}
+
+.codeBlock {
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 24px;
+  background: #12121a;
+  border: 1px solid #1a1a2e;
+}
+
+.conceptsSection {
+  margin-top: 48px;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.concept {
+  margin-bottom: 24px;
+}
+
+.conceptTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.conceptText {
+  color: #8b8b9e;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.highlight {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 32px 24px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .conceptTitle {
+    font-size: 16px;
+  }
+
+  .conceptText {
+    font-size: 14px;
+  }
+}

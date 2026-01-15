@@ -1,0 +1,39 @@
+.header {
+  border-bottom: 1px solid #1a1a2e;
+  background: #0a0a0f;
+}
+
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 48px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 24px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navLink {
+  text-decoration: none;
+  color: #8b8b9e;
+}
+
+.navLinkActive {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    padding: 16px 24px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+}

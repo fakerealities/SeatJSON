@@ -1,0 +1,104 @@
+.page {
+  background: #0a0a0f;
+  min-height: 100vh;
+}
+
+.container {
+  padding: 64px 48px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #8b8b9e;
+  margin: 0 0 48px;
+}
+
+.section {
+  margin-bottom: 64px;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.text {
+  color: #8b8b9e;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.textSmall {
+  color: #8b8b9e;
+  line-height: 1.6;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.codeBlock {
+  background: #12121a;
+  padding: 16px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 14px;
+  overflow-x: auto;
+  border: 1px solid #1a1a2e;
+  color: #e0e0e0;
+}
+
+.list {
+  color: #8b8b9e;
+  line-height: 1.8;
+  padding-left: 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 24px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .sectionTitle {
+    font-size: 24px;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+
+  .textSmall {
+    font-size: 13px;
+  }
+
+  .codeBlock {
+    font-size: 12px;
+    padding: 12px;
+  }
+
+  .list {
+    font-size: 14px;
+    padding-left: 20px;
+  }
+}
